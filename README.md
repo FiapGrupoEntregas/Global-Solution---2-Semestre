@@ -16,10 +16,10 @@
 **[PREENCHER: nome do grupo]** · Turma: **[PREENCHER: ex. 1TIAOAB]**
 
 ## 👨‍🎓 Integrantes:
-- <a href="[PREENCHER: link GitHub ou LinkedIn]">Jonattas Felipe [PREENCHER: sobrenome completo]</a> - RM572692
-- <a href="[PREENCHER: link GitHub ou LinkedIn]">Natanael Filho [PREENCHER: nome completo]</a> - RM572474
-- <a href="[PREENCHER: link GitHub ou LinkedIn]">Pedro Henrique [PREENCHER: sobrenome completo]</a> - RM571394
-- <a href="[PREENCHER: link GitHub ou LinkedIn]">Andrews Oliveira [PREENCHER: nome completo]</a> - RM572311
+- <a href="[PREENCHER: link GitHub ou LinkedIn]">Jonattas Felipe - RM572692
+- <a href="[PREENCHER: link GitHub ou LinkedIn]">Natanael Filho  - RM572474
+- <a href="[PREENCHER: link GitHub ou LinkedIn]">Pedro Henrique  - RM571394
+- <a href="[PREENCHER: link GitHub ou LinkedIn]">Andrews Oliveira - RM572311
 
 ## 👩‍🏫 Professores:
 
