@@ -1,0 +1,7 @@
+pandas
+scikit-learn
+joblib
+streamlit
+plotly
+pytest
+# opcional (resumo com IA generativa): anthropic
