@@ -12,8 +12,8 @@
 
 # TriaSUS: regulação inteligente por risco e equidade no SUS (Global Solution 2026.2 - CitizenTech)
 
-## Nome do grupo
-[PREENCHER: nome do grupo] · Turma: 1TIAOB
+## Sala
+· Turma: 1TIAOB
 
 ## 👨‍🎓 Integrantes: 
 - <a href="[PREENCHER: link LinkedIn ou GitHub]">Jonattas Felipe</a> - RM572692
@@ -24,7 +24,7 @@
 ## 👩‍🏫 Professores:
 
 ### Tutor(a)
-- <a href="[PREENCHER: link LinkedIn da tutora]">Sabrina [PREENCHER: sobrenome]</a>
+- <a href="[PREENCHER: link LinkedIn da tutora]">Sabrina</a>
   
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi Chiovato</a>
