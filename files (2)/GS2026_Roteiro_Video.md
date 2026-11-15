@@ -26,7 +26,7 @@
 3. Aba **Painel do gestor**: espera mediana por região.
 4. Aba **Auditoria de equidade**: recall de alto risco 0,55 em municípios pequenos vs 0,76–0,77 nos demais. Explicar o motivo (menos sinais registrados).
 5. Aba **Consultas SQL**: escolher "Alto risco aguardando mais de N dias", mexer no slider e mostrar o SQL e o resultado.
-6. Aba **Nova solicitação**: colar o texto de exemplo, clicar em "Resumir e sugerir prioridade" e mostrar o resultado.
+6. Aba **Nova solicitação**: no modo "Escolher opções", marcar sinais de alerta nas listas e clicar em "Sugerir prioridade"; mostrar também o modo "Texto livre" (colar o texto de exemplo e clicar em "Resumir e sugerir prioridade"). Se quiserem, mostrar antes o menu `python iniciar.py`.
 
 **[3:45–4:15] Testes e limitações (Integrante 1 ou 2)**
 - 7 testes automatizados aprovados (`pytest`).

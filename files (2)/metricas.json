@@ -1,0 +1,81 @@
+{
+  "random_forest": {
+    "acuracia": 0.5288,
+    "recall_alto_risco": 0.6838407494145199,
+    "matriz_confusao": [
+      [
+        274,
+        97,
+        27,
+        8
+      ],
+      [
+        102,
+        179,
+        119,
+        17
+      ],
+      [
+        27,
+        94,
+        111,
+        44
+      ],
+      [
+        4,
+        10,
+        40,
+        97
+      ]
+    ]
+  },
+  "mlp": {
+    "acuracia": 0.6216,
+    "recall_alto_risco": 0.6791569086651054,
+    "matriz_confusao": [
+      [
+        313,
+        92,
+        1,
+        0
+      ],
+      [
+        105,
+        248,
+        64,
+        0
+      ],
+      [
+        21,
+        106,
+        126,
+        23
+      ],
+      [
+        4,
+        6,
+        51,
+        90
+      ]
+    ]
+  },
+  "melhor": "random_forest",
+  "recall_por_subgrupo": {
+    "regiao": {
+      "Centro-Oeste": 0.733,
+      "Nordeste": 0.695,
+      "Norte": 0.742,
+      "Sudeste": 0.619,
+      "Sul": 0.797
+    },
+    "porte": {
+      "grande": 0.762,
+      "medio": 0.773,
+      "pequeno": 0.554
+    },
+    "sexo": {
+      "F": 0.681,
+      "M": 0.686
+    }
+  }
+}

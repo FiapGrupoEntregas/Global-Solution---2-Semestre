@@ -6,10 +6,10 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from fila import ROTULOS, ordenar
+from fila import AJUSTE_REGIAO, ROTULOS, escore, ordenar
 from banco import CONSULTAS, consultar, criar_banco
 from config import CSV, DB, METRICAS, MODELO
-from resumo import resumo_llm
+from resumo import SINAIS, resumo_llm
 from treinar_modelo import CAT, NUM
 
 st.set_page_config(page_title="TriaSUS (POC)", layout="wide")
@@ -66,18 +66,42 @@ with aba3:
             "Ausência de dado deve acionar revisão humana, não baixa prioridade.")
 
 with aba4:
-    txt = st.text_area("Texto livre da solicitação", "Paciente F, 63 anos, encaminhado para Cardiologia. Relata dor intensa, falta de ar. 2 comorbidade(s) crônica(s).")
-    if st.button("Resumir e sugerir prioridade"):
-        r = resumo_llm(txt)
-        st.json(r)
-        n_sinais = len(r["sinais_de_alerta"]) if isinstance(r["sinais_de_alerta"], list) else 0
-        com = int(r["comorbidades"]) if str(r["comorbidades"]).isdigit() else 0
-        idade = int(r["idade"]) if str(r["idade"]).isdigit() else 50
-        esp_n = r["especialidade"] if r["especialidade"] != "não informado" else "Cardiologia"
-        x = pd.DataFrame([{"idade": idade, "n_sinais_alerta": n_sinais, "comorbidades": com,
-                           "sexo": "F" if "F," in txt else "M", "especialidade": esp_n}])
+    modo = st.radio("Como informar a solicitação?", ["Escolher opções", "Texto livre"], horizontal=True)
+    n_sinais = com = idade = 0
+    sexo, esp_n, regiao, porte, dias = "F", "Cardiologia", "Nordeste", "pequeno", 30
+    pronto = False
+    if modo == "Escolher opções":
+        c1, c2, c3 = st.columns(3)
+        idade = c1.slider("Idade", 0, 95, 60)
+        sexo = c1.selectbox("Sexo", ["F", "M"])
+        esp_n = c2.selectbox("Especialidade", sorted(df.especialidade.unique()))
+        sinais = c2.multiselect("Sinais de alerta", SINAIS)
+        com = c3.selectbox("Comorbidades crônicas", [0, 1, 2, 3])
+        regiao = c3.selectbox("Região", list(AJUSTE_REGIAO))
+        porte = c1.selectbox("Porte do município", ["pequeno", "medio", "grande"])
+        dias = c2.slider("Dias já esperados", 0, 365, 30)
+        n_sinais = len(sinais)
+        pronto = st.button("Sugerir prioridade")
+    else:
+        txt = st.text_area("Texto livre da solicitação", "Paciente F, 63 anos, encaminhado para Cardiologia. Relata dor intensa, falta de ar. 2 comorbidade(s) crônica(s).")
+        regiao = st.selectbox("Região", list(AJUSTE_REGIAO))
+        porte = st.selectbox("Porte do município", ["pequeno", "medio", "grande"])
+        dias = st.slider("Dias já esperados", 0, 365, 30)
+        if st.button("Resumir e sugerir prioridade"):
+            r = resumo_llm(txt)
+            st.json(r)
+            n_sinais = len(r["sinais_de_alerta"]) if isinstance(r["sinais_de_alerta"], list) else 0
+            com = int(r["comorbidades"]) if str(r["comorbidades"]).isdigit() else 0
+            idade = int(r["idade"]) if str(r["idade"]).isdigit() else 50
+            esp_n = r["especialidade"] if r["especialidade"] != "não informado" else "Cardiologia"
+            sexo = "F" if "F," in txt else "M"
+            pronto = True
+    if pronto:
+        x = pd.DataFrame([{"idade": idade, "n_sinais_alerta": n_sinais, "comorbidades": com, "sexo": sexo, "especialidade": esp_n}])
         p = int(m.predict(x[NUM + CAT])[0])
-        st.success(f"Sugestão: {ROTULOS[p]} (o regulador decide)")
+        sc = escore(p, dias, regiao, porte)
+        pos = int((ordenar(df)["escore_fila"] > sc).sum()) + 1
+        st.success(f"Sugestão: {ROTULOS[p]} | escore de fila {sc} | entraria na posição {pos} de {len(df) + 1} (o regulador decide)")
 
 with aba5:
     import os
